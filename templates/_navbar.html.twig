@@ -10,14 +10,14 @@
                     <!-- Elements du menu -->
                     <ul class="navbar-nav mr-auto">
                         <!-- Elements du menu -->
-                        <li class="nav-item">
-                            <a class="nav-link" href="/programs/">Programs</a>
+                            <li class="nav-item">
+                            <a class="nav-link" href="/">accueil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Actualités</a>
+                            <a class="nav-link active" href="{{ path("program_index") }}">Programmes</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="#">Mon espace</a>
+                            <a class="nav-link" href="{{ path("category_index") }}">Catégories</a>
                         </li>
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
