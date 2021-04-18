@@ -15,7 +15,8 @@
                 <h3>Saison: {{ season.number }} Année de sortie: {{ season.year }}</h3>
                 <p>{{ season.description }}</p>
                 {# Lien vers la fiche de la saison : #}
-                <a href="/programs/{{ program.id }}/season/ {{ season.id }}">Voir les épisodes</a>
+                {# <a href="/programs/{{ program.id }}/season/ {{ season.id }}">Voir les épisodes</a> #}
+                <a href="{{ path("program_season_show", {"program": program.id, "season": season.id })}}"> Voir les épisodes</a>
             </div>
         {% else %}
             Aucune saison trouvée.
