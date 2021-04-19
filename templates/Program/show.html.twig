@@ -21,7 +21,16 @@
         {% else %}
             Aucune saison trouvée.
         {% endfor %}
-        <a href="{{ path('program_index') }}">Retour à la liste des programmes</a>
+
+        <table class="table">
+        <tbody>
+            <tr>   
+                <td><a href="{{ path('program_index') }}">Retour à la liste des programmes</a></td>
+            </tr>
+            <tr>
+                <td><a href="{{ path('program_edit', { id: program.id } ) }}">Modifier</a></td>
+            </tr>
+        </tbody>
     </div>
 
 </div>
