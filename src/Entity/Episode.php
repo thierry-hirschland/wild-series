@@ -84,7 +84,7 @@ class Episode
     /**
      * @return Collection|season[]
      */
-    public function getSeason(): Season
+    public function getSeason(): ?Season
     {
         return $this->season;
     }

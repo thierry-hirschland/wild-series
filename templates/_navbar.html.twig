@@ -11,13 +11,19 @@
                     <ul class="navbar-nav mr-auto">
                         <!-- Elements du menu -->
                             <li class="nav-item">
-                            <a class="nav-link" href="/">accueil</a>
+                            <a class="nav-link active" href="/">accueil</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link active" href="{{ path("program_index") }}">Programmes</a>
+                            <a class="nav-link" href="{{ path("program_index") }}">Programmes</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{ path("category_index") }}">Catégories</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path("season_index") }}">Saisons</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path("episode_index") }}">Episode</a>
                         </li>
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
