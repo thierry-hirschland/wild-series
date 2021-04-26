@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use Faker;
 use App\Entity\Episode;
+use App\Service\Slugify;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -58,6 +59,13 @@ class EpisodeFixtures extends Fixture implements DependentFixtureInterface
         ],
     ];
 
+    protected $slugify;
+
+    public function __construct(Slugify $slugify)
+    {
+        $this->slugify = $slugify;
+    }
+
     public function load(ObjectManager $manager)
     {
         $i = 1;
@@ -67,6 +75,8 @@ class EpisodeFixtures extends Fixture implements DependentFixtureInterface
             $episode->setNumber($data['number']);
             $episode->setSynopsis($data['synopsis']);
             $episode->setSeason($this->getReference($data['season']));
+            $slug = $this->slugify->generate($title);
+            $episode->setSlug($slug);
             $manager->persist($episode);
             $this->addReference('episode_' . $i, $episode);
             $i++;
@@ -77,10 +87,12 @@ class EpisodeFixtures extends Fixture implements DependentFixtureInterface
         for ($i=1; $i < 48; $i++) {
             for ($j=1; $j <= 12; $j++) {
                 $episode = new Episode();
-                $episode->setTitle($faker->sentence());
+                $episode->setTitle($faker->sentence(2));
                 $episode->setNumber($j);
                 $episode->setSynopsis($faker->text(200));
                 $episode->setSeason($this->getReference('season_' . $nbSaison));
+                $slug = $this->slugify->generate($episode->getTitle());
+                $episode->setSlug($slug);
                 $manager->persist($episode);
                 $this->addReference('episode_' . $nbEpisode, $episode);
                 $nbEpisode++;

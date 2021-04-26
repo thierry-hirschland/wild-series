@@ -4,8 +4,28 @@
 
 {% block body %}
     <h1>Create new Program</h1>
+    {{ form_start(form) }}
+    <div class="my-custom-class-for-errors">
+        {{ form_errors(form) }}
+    </div>
 
-    {{ include('Program/_form.html.twig') }}
+    <div class="row">
+        <div class="col">
+            {{ form_label(form.title, 'Titre de la série') }}
+            {{ form_errors(form.title) }}
+            {{ form_row(form.title) }}
+        </div>
+        <div class="col" id="some-custom-id">
+            {{ form_label(form.summary, 'Sommaire de la série') }}
+            {{ form_errors(form.summary) }}
+            {{ form_row(form.summary) }}
+        </div>
+    </div>
+    {{ form_widget(form) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}
+
+    {# {{ include('Program/_form.html.twig') }} #}
 
     <a href="{{ path('program_index') }}">back to list</a>
 {% endblock %}
