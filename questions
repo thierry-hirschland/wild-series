@@ -1,0 +1,28 @@
+thésaurus
+    relation entre le thésaurus et les thématiques et les mots clés?
+
+
+formulaire de saisie
+    quels sont les champs listes et quels sont les champs libres ?
+    signification des champs "cote" et  ISSN-ISBN" et "tomaison" ?
+    pagination = nombre de page de l'ouvrage ?
+    adresse document source difference avec localisation ?
+
+formulaire consultation ou modification notice
+    Peut-on avoir plusieurs notices par oeuvre ou une notice pour plusieurs oeuvre ?
+    je vois des dates de mises à jour donc des modification
+    Y a t'il une historisation des notices ?
+    Est ce la notice de l'auteur ?
+
+formulaire recherche & consultation
+    affichage des ouvrages disponible ? (non déja empruntés)
+
+répartition documents
+    même affichage que sur excel (par type et thème) ?
+
+list description géographique
+    même chose que localisation ?
+    C'est la localisation physique de l'oeuvre ?
+
+Concatener motsclés
+    Pourrait-on avoir plus de 3 mots-clés de recherche dans l'avenir ?
