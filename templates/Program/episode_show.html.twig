@@ -11,19 +11,10 @@
         <h2>Catégorie : {{ program.category.name }}</h2>
         <h3>Saison: {{ season.number }} Année de sortie: {{ season.year }}</h3>
         <p>{{ season.description }}</p>
-        <br>
-        {% for episode in season.episodes %}
-            <div>
-                <h4>Episode: {{ episode.number }} Titre: {{ episode.title }}</h4>
-                <a href="{{ path("program_episode_show", { "program": program.id, "season": season.id, "episode": episode.id }) }}">
-                    Voir
-                </a>
-            </div>
-        {% else %}
-            Aucune épisode trouvée.
-        {% endfor %}
-        <a href="{{ path("program_show", { id: program.id }) }}">
-        Retour à la liste des saisons
+        <h4>Episode: {{ episode.number }} Titre: {{ episode.title }}</h4>
+        <p>{{ episode.synopsis }}</p>
+        <a href="{{ path("program_season_show", {"program": program.id, "season": season.id })}}">
+            Retour à la liste des épisodes
         </a>
     </div>
     
