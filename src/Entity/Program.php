@@ -6,9 +6,16 @@ use App\Repository\ProgramRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass=ProgramRepository::class)
+ * @Assert\EnableAutoMapping()
+ * @UniqueEntity(
+ *      fields={"title"},
+ *      message="ce titre existe déjà"
+ * )
  */
 class Program
 {
@@ -21,11 +28,19 @@ class Program
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Length(max="50", maxMessage="Le titre {{ value}} est trop long, il ne devrait pas dépasser {{ limit }} caractères")
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank()
+     * @Assert\Regex(
+     *      pattern="/plus belle la vie/i",
+     *      match=false,
+     *      message="le somaire ne peut pas contenir <  plus belle la vie >"
+     * )
      */
     private $summary;
 

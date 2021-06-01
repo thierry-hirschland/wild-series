@@ -1,18 +1,50 @@
 <?php
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Program;
 use App\Entity\Season;
 use App\Entity\Episode;
+use App\Form\ProgramType;
+use App\Repository\ProgramRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/programs", name="program_")
  */
 class ProgramController extends AbstractController
 {
+    /**
+     * The controller for the program add form
+     * @Route("/new", name="new")
+     */
+    public function new(Request $request): Response
+    {
+        // Create a new Program Object
+        $program = new Program();
+        // Create the associated Form
+        $form = $this->createForm(ProgramType::class, $program);
+        // Get data from HTTP request
+        $form->handleRequest($request);
+        // Check if submitted ?
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Get the Entity Manager
+            $entityManager = $this->getDoctrine()->getManager();
+            // Persist Category Object
+            $entityManager->persist($program);
+            // Flush the persisted object
+            $entityManager->flush();
+            // redirect to categories list
+            return $this->redirectToRoute('program_index');
+        };
+        // Render the form
+        return $this->render('Program/new.html.twig', [
+            "form" => $form->createView(),
+        ]);
+    }
+
     /**
      * Show all rows from Program's entity
      * @Route("/", name="index")
@@ -44,6 +76,40 @@ class ProgramController extends AbstractController
         return $this->render('Program/show.html.twig', [
             'program' => $program,
         ]);
+    }
+
+    /**
+     * @Route("/edit/{id}", name="edit", methods={"GET","POST"})
+     */
+    public function edit(Request $request, Program $program): Response
+    {
+        $form = $this->createForm(ProgramType::class, $program);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('program_index');
+        }
+
+        return $this->render('Program/edit.html.twig', [
+            'program' => $program,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", name="delete", methods={"POST"})
+     */
+    public function delete(Request $request, Program $program): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$program->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($program);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('program_index');
     }
 
     /**
