@@ -15,7 +15,7 @@ class ProgramController extends AbstractController
         // return new Response(
         //     '<html><body>Wild Series Index</body></html>'
         // );
-        return $this->render('program/index.html.twig', [
+        return $this->render('Program/index.html.twig', [
             'website' => 'Wild Series',
         ]);
     }
