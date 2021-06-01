@@ -5,18 +5,28 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/programs", name="program_")
+ */
 class ProgramController extends AbstractController
 {
     /**
-     * @Route("/programs/", name="program_index")
+     * @Route("/", name="index")
      */
     public function index(): Response
     {
-        // return new Response(
-        //     '<html><body>Wild Series Index</body></html>'
-        // );
         return $this->render('Program/index.html.twig', [
             'website' => 'Wild Series',
+        ]);
+    }
+
+    /**
+     * @Route("/show/{id<\d+>}", methods={"GET"}, name="show")
+     */
+    public function show(int $id): Response
+    {
+        return $this->render('Program/show.html.twig', [
+            'id' => $id,
         ]);
     }
 }
