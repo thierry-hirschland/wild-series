@@ -41,6 +41,7 @@ class ProgramController extends AbstractController
         };
         // Render the form
         return $this->render('Program/new.html.twig', [
+            'program' => $program,
             "form" => $form->createView(),
         ]);
     }
