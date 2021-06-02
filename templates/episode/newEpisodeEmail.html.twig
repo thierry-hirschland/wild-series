@@ -1,0 +1,11 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}New Episode{% endblock %}
+
+{% block body %}
+    <h1>New episode</h1>
+    <h2>{{ episode.title }} created</h2>
+    <p>Hello, the new episode {{ episode.title }} has been created on Wild Series</p>
+    <p>for the season {{ episode.season.description }}</p>
+    <p>Summary : {{episode.synopsis }}
+{% endblock %}

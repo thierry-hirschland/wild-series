@@ -11,6 +11,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -22,26 +24,29 @@ class ProgramController extends AbstractController
      * The controller for the program add form
      * @Route("/new", name="new")
      */
-    public function new(Request $request, Slugify $slugify): Response
+    public function new(Request $request, Slugify $slugify, MailerInterface $mailer): Response
     {
-        // Create a new Program Object
         $program = new Program();
-        // Create the associated Form
         $form = $this->createForm(ProgramType::class, $program);
-        // Get data from HTTP request
         $form->handleRequest($request);
-        // Check if submitted ?
         if ($form->isSubmitted()) {
-            // Get the Entity Manager
             $entityManager = $this->getDoctrine()->getManager();
             $slug = $slugify->generate($program->getTitle());
             $program->setSlug($slug);
 
-            // Persist Category Object
             $entityManager->persist($program);
-            // Flush the persisted object
             $entityManager->flush();
-            // redirect to categories list
+
+            $email = (new Email())
+                ->from($this->getParameter('mailer_from'))
+                ->to($this->getParameter('mailer_to'))
+                ->subject('Une nouvelle série vient d\'être publiée !')
+                ->html($this->renderView(
+                    'Program/newProgramEmail.html.twig',
+                    ['program' => $program]
+                ));
+
+            $mailer->send($email);
             return $this->redirectToRoute('program_index');
         };
 
