@@ -13,7 +13,7 @@
         <p>{{ season.description }}</p>
         <h4>Episode: {{ episode.number }} Titre: {{ episode.title }}</h4>
         <p>{{ episode.synopsis }}</p>
-        <a href="{{ path("program_season_show", {"program": program.id, "season": season.id })}}">
+        <a href="{{ path("program_season_show", {"program": program.slug, "season": season.number })}}">
             Retour à la liste des épisodes
         </a>
     </div>

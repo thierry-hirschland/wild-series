@@ -4,12 +4,14 @@
 
 {% block body %}
     <h1>Episode index</h1>
-
+ 
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Title</th>
+                <th>N° de Saison</th>
+                <th>Année</th>
+                <th>Description</th>
+                <th>titre</th>
                 <th>Number</th>
                 <th>Synopsis</th>
                 <th>actions</th>
@@ -18,13 +20,16 @@
         <tbody>
         {% for episode in episodes %}
             <tr>
+                <td>{{ episode.season.number}}</td>
+                <td>{{ episode.Season.year}}</td>
+                <td>{{ episode.Season.description}}</td>
                 <td>{{ episode.id }}</td>
                 <td>{{ episode.title }}</td>
                 <td>{{ episode.number }}</td>
                 <td>{{ episode.synopsis }}</td>
                 <td>
-                    <a href="{{ path('episode_show', {'id': episode.id}) }}">show</a>
-                    <a href="{{ path('episode_edit', {'id': episode.id}) }}">edit</a>
+                    <a href="{{ path('episode_show', {'episode': episode.slug}) }}">show</a>
+                    <a href="{{ path('episode_edit', {'episode': episode.slug}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -36,4 +41,5 @@
     </table>
 
     <a href="{{ path('episode_new') }}">Create new</a>
+    
 {% endblock %}

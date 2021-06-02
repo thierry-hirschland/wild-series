@@ -8,6 +8,8 @@
     <table class="table">
         <thead>
             <tr>
+                <th>Série</th>
+                <th>Catégorie</th>
                 <th>Id</th>
                 <th>Number</th>
                 <th>Year</th>
@@ -18,6 +20,9 @@
         <tbody>
         {% for season in seasons %}
             <tr>
+                <td>{{ season.program.title }}</td>
+                <td>{{ season.program.category.name }}</td>
+                <td>{{ season.year }}</td>
                 <td>{{ season.id }}</td>
                 <td>{{ season.number }}</td>
                 <td>{{ season.year }}</td>

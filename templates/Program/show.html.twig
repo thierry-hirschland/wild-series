@@ -16,7 +16,7 @@
                 <p>{{ season.description }}</p>
                 {# Lien vers la fiche de la saison : #}
                 {# <a href="/programs/{{ program.id }}/season/ {{ season.id }}">Voir les épisodes</a> #}
-                <a href="{{ path("program_season_show", {"program": program.id, "season": season.id })}}"> Voir les épisodes</a>
+                <a href="{{ path("program_season_show", {"program": program.slug, "season": season.number })}}"> Voir les épisodes</a>
             </div>
         {% else %}
             Aucune saison trouvée.
@@ -36,7 +36,7 @@
                 <td><a href="{{ path('program_index') }}">Retour à la liste des programmes</a></td>
             </tr>
             <tr>
-                <td><a href="{{ path('program_edit', { id: program.id } ) }}">Modifier</a></td>
+                <td><a href="{{ path('program_edit', { program: program.slug } ) }}">Modifier</a></td>
             </tr>
         </tbody>
     </div>
